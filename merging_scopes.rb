@@ -32,8 +32,8 @@ end
 
 class Post < ActiveRecord
   has_many :comments
-  scope :with_approved_comments
-  -> { joins(:comments).merge(Comment.approved) } # checkout the .merge method working
+  scope :with_approved_comments,
+  ->{ joins(:comments).merge(Comment.approved) } # checkout the .merge method working
 end
 
 Post.with_approved_comments
