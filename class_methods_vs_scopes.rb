@@ -1,7 +1,8 @@
 # CLASS METHODS VS SCOPE
-#------------------------
 
-# CLASS METHOD VERSION
+# here is a class method that gets an authors recent post
+# this example also illustrates why scope is a better option
+# the class method can be verbose while the scope method is much more slim
 
 # app\models\post.rb
 class Post < ActiveRecord
@@ -34,7 +35,7 @@ class Post < ActiveRecord
 end
 
 # so...we add 'author.present?' otherwise it will return nil (or null, same thing)
-# but then we call 
+# but then we call
 Post.by_author.recent
 # this will cause a NoMethodError: undefined method 'recent' for nil:class
 # to fix this error we will have to go back to the 'by_author' method and add an else block
@@ -44,7 +45,7 @@ Post.by_author.recent
 class Post < ActiveRecord
 	def self.by_author(author)
 		if author.present?
-			where(author: author) 
+			where(author: author)
 		else
 			return all
 		end
