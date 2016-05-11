@@ -154,7 +154,7 @@ module Previewable
 end
 
 # now...to call our thumbnail method from our controllers just inlude the Previewable module
-# simply mix in the new module in the controller
+# simply mix in the new module in the controller using include
 
 # app\controllers\images_controller.rb
 class ImageController < ApplicationController
