@@ -1,5 +1,5 @@
 # concerns help extract duplicate code in modules that can be reused in multiple controllers or models
-# below are some examples on how to do just that
+# checkout the examples below
 
 # this is a Post class which has_many comments, a polymorphic association
 # represented by the Comments class
