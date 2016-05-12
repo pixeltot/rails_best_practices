@@ -200,3 +200,38 @@ end
 # <article class="<%= @post_decorator.classes %>">
 #   <%= @post_decorator.content %>
 # </article>
+
+# ----------------------------------------------------------
+
+# Lastly, let's have our ItemsController return a collection of decorated objects
+# by using the build_collection method from the ItemDecorator class.
+# This method takes Item.all and wraps each record in a decorator.
+
+class ItemDecorator
+  def self.build_collection(items)
+    items.map { |item| new(item) }
+  end
+
+  def initialize(item)
+    @item = item
+  end
+
+  def is_featured?
+    @item.ratings > 5
+  end
+
+  def method_missing(method_name, *args, &block)
+    @item.send(method_name, *args, &block)
+  end
+
+  def respond_to_missing?(method_name, include_private = false)
+    @item.respond_to?(method_name, include_private) || super
+  end
+end
+
+# app\controllers\item_controller.rb
+class ItemsController < ApplicationController
+  def index
+    @items = ItemDecorator.build_collection(Item.all)
+  end
+end
