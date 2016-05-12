@@ -170,7 +170,7 @@ end
 # heres how to add custom properties to your serializers
 
 # app\serializers\item_serializer.rb
-class ItemSerializer < ActiveModel:: Serializer
+class ItemSerializer < ActiveModel::Serializer
   attributes :id, :name, :url
 
   def url
