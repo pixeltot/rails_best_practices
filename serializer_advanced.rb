@@ -13,9 +13,9 @@ class ItemSerializer < ActiveModel::Serializer
 end
 
 # in the example above we've defined id, name, and URL
-# then in our URL methoed we are calling a route helper an passing in object as an argument
+# then in our URL methoed we are calling a route helper and passing in object as an argument
 # object represents the object being serialized, in this case item
-# for each item , we also want to serialize its comments, we do that by adding the relationship method has_many :comments
+# for each item, we also want to serialize its comments, we do that by adding the relationship method has_many :comments
 # now each element of the association is serialized
 # when a custom serializer isnt fond, the default Rails serialization is used
 
