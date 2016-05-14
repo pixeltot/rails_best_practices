@@ -13,7 +13,7 @@ class ItemSerializer < ActiveModel::Serializer
 end
 
 # in the example above we've defined id, name, and URL
-# then in our URL methoed we are calling a route helper and passing in object as an argument
+# then in our URL method we are calling a route helper and passing in object as an argument
 # object represents the object being serialized, in this case item
 # for each item, we also want to serialize its comments, we do that by adding the relationship method has_many :comments
 # now each element of the association is serialized
@@ -46,7 +46,7 @@ end
 # anytime less data is transferring down to the client the faster it will be
 
 # to do this we have to embed: :ids as an option to has_many,
-# which will return the IDs for the associations, instead of the entire object
+# which will return the ids for the associations, instead of the entire object
 # for example:
 # app\serializers\item_serializer.rb
 class ItemSerializer < ActiveModel::Serializer
@@ -188,6 +188,7 @@ class ItemSerializer < AxctiveModel::Serializer
     if current_user.premium_account? # <--- current_user helper method
       data[:discounted_price] = object.discounted_price
     end
+    data # <-- you need to add the result of 'object.discout_price' to 'data[:discounted_price]'
   end
 end
 
