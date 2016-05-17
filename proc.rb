@@ -1,7 +1,7 @@
 # Procfile Configuration
 
 # Procfile
-web: bundle exec rails s-p $PORT
+web: bundle exec rails s -p $PORT
 
 # format for Procfile
 <process-type>: <command> # <--- simple format
