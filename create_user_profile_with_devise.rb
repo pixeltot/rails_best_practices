@@ -28,6 +28,20 @@ class Profile < ActiveRecord::Base
                                 size: { in: 0..1.megabytes }
 end
 
+# app\models\user.rb
+ ...
+  has_one :profile, dependent: :destroy
+  accepts_nested_attributes_for :profile
+  ...
+  def username
+    self.email.split(/@/).first
+  end
+
+  def to_param
+    "#{id} #{username}".to_slug.normalize.to_s
+  end
+  ...
+
 
 # 4. Routes
 # ----------
