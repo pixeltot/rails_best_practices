@@ -1,0 +1,7 @@
+
+<% @movies.each do |movie| %>
+  <%= link_to movie.title, movie_path(movie)%>
+<% end %>
+
+# this would generate a movie title link assuming you have your model and controllers setup
+# the movie title would be a link to the show view
