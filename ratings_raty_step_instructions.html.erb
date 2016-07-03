@@ -1,0 +1,80 @@
+# STEP 1
+#-------
+# Download the raty.jquery.js plugin and stick it in your Javascripts Assests Directory
+
+# download here:
+https://www.genkan.com.au/javascript/raty/
+
+# stick it in here:
+YourApp\app\assets\javascripts\raty.jquery.js
+
+# stick the images that come with the raty.jquery.js plugin in your assets\images directory
+
+# here:
+YourApp\app\assets\images\"stick-the-images-in-here"
+
+# STEP 2
+# ------
+# you must already have an Attribute in your Model with an integer data type set
+# for example you could have a Review Model with a rating attribute:
+
+$ rails g model Review rating:integer comment:text
+
+
+# STEP 3
+# ------
+# as long as the associations are setup you can add this to your views
+# it sets up a @reviews block
+# looks for a review.rating
+# the most important part is this:
+<div class="star-rating" data-score= <%= review.rating %> ></div>
+
+#----------------------------------------------------------------
+
+<div>
+  <% if @reviews.blank? %>
+    <p>be the first to write a review</p>
+    <p><%= link_to 'Write a Review', new_movie_review_path(@movie) %></p>
+  <% else %>
+    <% @reviews.each do |review| %>
+      <%= review.user.email %><br>
+
+      <div class="star-rating" data-score= <%= review.rating %> ></div>
+
+      <%= review.rating %><br>
+      <%= review.comment %><br>
+      <br>
+    <% end %>
+  <% end %>
+</div>
+#----------------------------------------------------------------
+
+# STEP 4
+# ------
+# add this script to the bottom of the view
+<script>
+  $('.star-rating').raty({
+    path: '/assets/',
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    }
+  });
+</script>
+
+
+# STEP 5
+# ------
+# lets say you also want to use the stars to set a rating, instead of a number_field
+# add this to your _form.html.erb
+
+<div class="field">
+  <div id="star-rating"></div>
+</div>
+
+<script>
+  $('#star-rating').raty({
+    path: '/assets/',
+    scoreName: 'review[rating]'
+  });
+</script>
